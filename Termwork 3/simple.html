@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<body>
+
+<p>Try to change the names.</p>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+Enter First Number: <input type="number" ng-model="firstNum"><br>
+Enter Second Number: <input type="number" ng-model="secondNum"><br>
+<br> Addition: {{firstNum + secondNum}}
+<br> Subtraction: {{firstNum - secondNum}}
+<br> multiplication: {{firstNum * secondNum}}
+<br> Division: {{firstNum / secondNum}}
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstNum= 0;
+    $scope.secondNum= 0;
+});
+</script>
+
+</body>
+</html>
