@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details to Uppercase</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="studentApp" ng-controller="studentController">
+
+    <h2>Student Details</h2>
+
+    <ul>
+        <li ng-repeat="student in students">
+            {{ student | uppercaseStudent }}
+        </li>
+    </ul>
+
+</body>
+</html>
