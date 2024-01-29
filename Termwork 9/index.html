@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="employeeApp" ng-controller="employeeController">
+
+    <h2>Employee List</h2>
+
+    <label>Search by Name:</label>
+    <input type="text" ng-model="searchName">
+    
+    <label>Search by Salary:</label>
+    <input type="number" ng-model="searchSalary">
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+        </tr>
+        <tr ng-repeat="employee in employees | filter:searchName | filter:customSalaryFilter">
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.salary }}</td>
+        </tr>
+    </table>
+
+</body>
+</html>
