@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="todo.js"></script>
+</head>
+<body ng-app="todoApp">
+
+    <div ng-controller="TodoController as todoCtrl">
+        <input type="text" ng-model="todoCtrl.newTask" placeholder="Enter new task" />
+        <button ng-click="todoCtrl.addTask()">Add Task</button>
+
+        <ul>
+            <li ng-repeat="task in todoCtrl.tasks">
+                <input type="text" ng-model="task.text" ng-disabled="!task.editing" />
+                <button ng-click="task.editing = true">Edit</button>
+                <button ng-click="todoCtrl.deleteTask($index)">Delete</button>
+                <button ng-click="task.editing = false" ng-show="task.editing">Save</button>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
