@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Simple CRUD Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body ng-app="userApp" ng-controller="UserController">
+
+<h2>Users Management</h2>
+
+<!-- Form for adding a new user -->
+<form ng-submit="addUser()">
+    <input type="text" ng-model="newUser.name" placeholder="Name" required>
+    <input type="email" ng-model="newUser.email" placeholder="Email" required>
+    <button type="submit">Add User</button>
+</form>
+
+<!-- Table to display users -->
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="user in users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+            <button ng-click="editUser($index)">Edit</button>
+            <button ng-click="deleteUser($index)">Delete</button>
+        </td>
+    </tr>
+</table>
+
+<!-- Form for editing a user -->
+<div ng-if="editingUser">
+    <h3>Edit User</h3>
+    <form ng-submit="updateUser()">
+        <input type="text" ng-model="editingUser.name" placeholder="Name" required>
+        <input type="email" ng-model="editingUser.email" placeholder="Email" required>
+        <button type="submit">Update User</button>
+        <button type="button" ng-click="cancelEditing()">Cancel</button>
+    </form>
+</div>
+
+<script>
+    var app = angular.module('userApp', []);
+    app.controller('UserController', function($scope) {
+        $scope.users = [
+            {id: 1, name: 'John Doe', email: 'john@example.com'},
+            {id: 2, name: 'Jane Doe', email: 'jane@example.com'}
+        ];
+
+        $scope.addUser = function() {
+            $scope.users.push({
+                id: $scope.users.length + 1,
+                name: $scope.newUser.name,
+                email: $scope.newUser.email
+            });
+            $scope.newUser.name = '';
+            $scope.newUser.email = '';
+        };
+
+        $scope.editUser = function(index) {
+            $scope.editingUser = angular.copy($scope.users[index]);
+            $scope.editingIndex = index;
+        };
+
+        $scope.updateUser = function() {
+            $scope.users[$scope.editingIndex] = angular.copy($scope.editingUser);
+            $scope.editingUser = {};
+        };
+
+        $scope.deleteUser = function(index) {
+            $scope.users.splice(index, 1);
+        };
+
+        $scope.cancelEditing = function() {
+            $scope.editingUser = {};
+        };
+    });
+</script>
+</body>
+</html>
 
